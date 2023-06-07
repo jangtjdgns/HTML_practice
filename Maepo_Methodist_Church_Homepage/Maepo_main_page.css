@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Jua&family=Noto+Sans+KR&display=swap');
+
+*{
+    margin: 0;
+}
+
+.wrapper{
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+/*
+    header
+*/
+
+
+header > div{
+    width: 1100px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+/*
+    middle_header
+*/
+
+.top_header{
+    background-color: #404969;
+}
+
+.top_header > .container{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px; 
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.top_header > .container > ul > li{
+    display: inline-block;
+    padding: 5px 40px 5px 0;
+}
+
+.top_header > .container > ul > li > a{
+    color:aliceblue;
+}
+
+/*
+    middle_header
+*/
+
+.middle_header > .container{
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 15px 30px;
+}
+
+.logo{
+    padding-left: 30px;
+    width: 200px;
+    filter: drop-shadow(1px 1px 1px #000);
+}
+
+.middle_header > .container > .menu{
+    padding-right: 10px;
+}
+
+.middle_header > .container > .menu > li{
+    display: inline-block;
+    padding: 0 0 0 20px;
+}
+
+.middle_header > .container > .menu > li > a{
+    color: #1b262c;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.middle_header > .container > .menu > li > a:hover{
+    color: #a0a0a0;
+}
+
+/*
+    bottom_header
+*/
+
+.bottom_header > hr{
+    background-color: #404969;
+}
+
+/*article*/
+
+.main_img{
+    height: 70vh;
+    overflow: hidden;
+    background-image: url("./Image/십자가2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.main_img > .banner_box{
+    background-color: aliceblue;
+    border: 1px solid rgb(218, 218, 218);
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 58%;
+    bottom: 0;
+}
