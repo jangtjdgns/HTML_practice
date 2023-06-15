@@ -1,192 +1,228 @@
-@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Jua&family=Noto+Sans+KR&display=swap');
-@font-face {
-    font-family: 'SUITE-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Jua&family=Noto+Sans+KR&display=swap');
+    @font-face {
+        font-family: 'SUITE-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+    }
 
-*{
-    margin: 0;
-}
+    *{
+        margin: 0;
+    }
 
-.wrapper{
-    width: 1130px;
-    height: auto;
-    margin: 0 auto;
-}
+    .wrapper{
+        width: 1130px;
+        height: auto;
+        margin: 0 auto;
+    }
 
-a{
-    text-decoration: none;
-}
+    a{
+        text-decoration: none;
+    }
 
-ul{
-    list-style: none;
-    padding: 0;
-}
-
-
-
-
-
-/*
-    header
-*/
-
-header{
-    height: auto;
-    margin: 0 auto;
-    
-    border: 1px solid;
-    border-bottom: 0;
-}
-
-/*
-    top_header
-*/
-
-.top_header > .container{
-    display: flex;
-    justify-content: space-between;
-    background-color: #404969;
-    padding-left: 40px; 
-    font-size: 14px;
-    font-weight: bolder;
-}
-
-.top_header > .container > ul > li{
-    display: inline-block;
-    padding: 5px 40px 5px 0;
-}
-
-.top_header > .container > ul > li > a{
-    color:aliceblue;
-}
-
-/*
-    middle_header
-*/
-
-.middle_header > .container{
-    display: flex;
-    justify-content: space-between;
-    font-size: 30px;
-    font-weight: bold;
-    padding: 25px;
-}
-
-.logo{
-    padding-left: 10px;
-    width: 200px;
-    filter: drop-shadow(1px 1px 1px #000);
-}
-
-.middle_header > .container > .menu{
-    padding-right: 10px;
-}
-
-.middle_header > .container > .menu > li{
-    display: inline-block;
-    padding: 0 0 0 20px;
-}
-
-.middle_header > .container > .menu > li > a{
-    color: #1b262c;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.middle_header > .container > .menu > li > a:hover{
-    color: #a0a0a0;
-}
+    ul{
+        list-style: none;
+        padding: 0;
+    }
 
 
 
 
 
-/*
-    article
-*/
+    /*
+        header
+    */
 
-main{
-    margin: 0;
-}
+    header{
+        height: auto;
+        margin: 0 auto;
+        
+        border: 1px solid;
+        border-bottom: 0;
+    }
 
-.main_img{
-    height: 500px;
-    background: url("./Image/십자가3.jpg") no-repeat;
-    background-size: cover;
-    background-position-y: 80%;
-    display: flex;
-    justify-content: space-between;
-}
+    /*
+        top_header
+    */
 
-.main_img > .contents_banner_box{
-    display: flex;
-    flex-direction: column;
-    margin: auto 0;
-}
+    .top_header > .container{
+        display: flex;
+        justify-content: space-between;
+        background-color: #404969;
+        padding-left: 40px; 
+        font-size: 14px;
+        font-weight: bolder;
+    }
 
-.main_img > .contents_banner_box > div{
-    width: 350px;
-    height: 230px;
-}
+    .top_header > .container > ul > li{
+        display: inline-block;
+        padding: 5px 40px 5px 0;
+    }
 
-.banner_top_banner{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: url(/Maepo_Methodist_Church_Homepage/Image/찬양1.jpg) no-repeat;
-    background-size: cover;
-}
+    .top_header > .container > ul > li > a{
+        color:aliceblue;
+    }
 
-.top_text_box > div{
-    color: whitesmoke;
-    font-family: 'SUITE-Regular';
-    font-size: 60px;
-    font-weight: bold;
-    filter: drop-shadow(5px 5px 5px rgb(48, 48, 48));
-}
+    /*
+        middle_header
+    */
 
-.top_text_box > .text_title_link{
-    text-align: center;
-    align-items: center;
-    font-size: 120px;
-}
+    .middle_header > .container{
+        display: flex;
+        justify-content: space-between;
+        font-size: 30px;
+        font-weight: bold;
+        padding: 25px;
+        height: 50px;
+    }
 
-.top_text_box > .text_title_link > a > i:hover{
-    filter: opacity(0.5) drop-shadow(0 0 0 #2c2a2a)
-}
+    .logo{
+        padding-left: 10px;
+        width: 230px;
+        filter: drop-shadow(1px 1px 1px #000);
+    }
 
-.banner_middle_banner{
-    background: url(/Maepo_Methodist_Church_Homepage/Image/SNS.png) no-repeat;
-    background-size: 100% 100%;
-}
+    .middle_header > .container > .menu{
+        padding-right: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .middle_header > .container > .menu > li{
+        display: inline-block;
+    }
+
+    .middle_header > .container > .menu > li > a{
+        color: #1b262c;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 35px;
+        padding: 0 20px;
+    }
+
+    .middle_header > .container > .menu > li > a:hover{
+        color: #a0a0a0;
+    }
+
+    .middle_header .menu > li ul {
+        display: none;
+    }
+
+    .middle_header .menu > li:hover > ul{
+        display: block;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        padding-top: 30px;
+        position: relative;
+        z-index: 1;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .middle_header .menu > li li{
+        padding-bottom: 10px;
+    }
+
+    .middle_header .menu > li > ul a{
+        color: #1b262c; 
+        margin: 20px 0;
+    }
+
+    .middle_header .menu > li > ul a:hover{
+        border-bottom: 2px solid gray;
+    }
+
+    /*
+        article
+    */
+
+    main{
+        margin: 0;
+    }
+
+    .main_img{
+        height: 500px;
+        background: url("./Image/십자가3.jpg") no-repeat;
+        background-size: cover;
+        background-position-y: 80%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .main_img > .contents_banner_box{
+        display: flex;
+        flex-direction: column;
+        margin: auto 0;
+    }
+
+    .main_img > .contents_banner_box > div{
+        width: 350px;
+        height: 230px;
+    }
+
+    .banner_top_banner{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: url(/Maepo_Methodist_Church_Homepage/Image/찬양1.jpg) no-repeat;
+        background-size: cover;
+    }
+
+    .top_text_box > div{
+        color: whitesmoke;
+        font-family: 'SUITE-Regular';
+        font-size: 60px;
+        font-weight: bold;
+        filter: drop-shadow(5px 5px 5px rgb(48, 48, 48));
+    }
+
+    .top_text_box > .text_title_link{
+        text-align: center;
+        align-items: center;
+        font-size: 120px;
+    }
+
+    .top_text_box > .text_title_link > a > i:hover{
+        filter: opacity(0.5) drop-shadow(0 0 0 #2c2a2a)
+    }
+
+    .banner_middle_banner{
+        background: url(/Maepo_Methodist_Church_Homepage/Image/SNS.png) no-repeat;
+        background-size: 100% 100%;
+    }
 
 
 
 
 
-/*
-    footer
-*/
+    /*
+        footer
+    */
 
-footer{
-    width: 100%;
-    height: 30%;
-    background-color: #464646;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color:rgb(253, 253, 253);
-    font-size: 14px;
-    font-weight: bold;
-}
+    footer{
+        height: 50px;
+        background-color: #464646;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color:rgb(253, 253, 253);
+        font-size: 14px;
+        font-weight: bold;
+        position:absolute;
+        bottom: 0;
+    }
 
-.copyright{ 
-    margin-left: 15%;
-}
+    .copyright{ 
+        margin-left: 60px; 
+    }
 
 
-.church_address{
-    margin-right: 15%;
-}
+    .church_address{
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 30px;
+    }
+
+    .church_address > p{
+        margin-right: 60px;
+    }
