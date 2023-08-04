@@ -1,0 +1,505 @@
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'twayair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NIXGONM-Vb';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+body {
+    line-height: 1;
+    height: auto;
+}
+
+header {}
+
+header #top-header {
+    font-family: 'twayair';
+    margin: 13px 0;
+    border-bottom: 1px solid gray;
+}
+
+header #header-sns {
+    margin: 15px 0;
+    color: rgb(167, 168, 174);
+}
+
+header #header-sns a {
+    margin: 0 20px;
+    color: rgb(167, 168, 174);
+}
+
+/* header #header-ask */
+
+header #header-sns i {
+    margin: 0 0 0 5px;
+}
+
+header .img-wrap {
+    text-align: center;
+}
+
+header img {
+    width: 500px;
+    margin: 50px 0 20px 0;
+}
+
+header .header-nav {
+    margin: 40px 0 0 0;
+    padding: 0 0 40px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+header .header-nav .title-menu {
+    text-align: center;
+    font-size: 30px;
+    height: 100%;
+    color: rgb(43, 43, 44);
+    font-family: 'twayair';
+    width: 200px;
+}
+
+header .header-nav .title-menu:hover {
+    cursor: pointer;
+    color: rgb(124, 124, 130);
+}
+
+/* 헤더 스크롤 메뉴 */
+header #header-sub {
+    position: absolute;
+    top: 320px;
+    left: 0;
+    z-index: 99;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 0;
+    transition: height 0.1s;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    border-top: 2px solid green;
+    border-bottom: 2px solid green;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    text-align: center;
+}
+
+header #header-sub div {
+    /* border: 2px solid; */
+    margin: 20px 0;
+    width: 200px;
+}
+
+header #header-sub .sub-title {
+    margin: 10px 0 20px 0;
+}
+
+header #header-sub .sub-title a {
+    font-family: 'Pretendard-Regular';
+    font-size: 22px;
+    color: green;
+}
+
+header #header-sub .sub-title a:hover {
+    text-decoration: underline;
+}
+
+header #header-sub ul {
+    margin: 10px 60px 20px 60px;
+}
+
+header #header-sub ul li {
+    margin: 15px 0;
+    width: 100px;
+    text-align: left;
+}
+
+header #header-sub ul li a {
+    width: 100%;
+}
+
+header #header-sub ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    /* background-color: #f9f9f9; */
+}
+
+
+
+/* 메인베너 */
+.main-banner {
+    height: 80vh;
+    background: url(/img/메인배너.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.main-banner .shortcut {
+    width: 17%;
+    height: 80px;
+}
+
+.main-banner #pray-shortcut {
+    position: absolute;
+    left: 3%;
+    bottom: 10%;
+}
+
+.main-banner #directions-shortcut {
+    position: absolute;
+    left: 23%;
+    bottom: 10%;
+}
+
+.main-banner .shortcut a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EEEEEE;
+    transform: scale(1);
+    transition: all 0.3s;
+}
+
+.main-banner .shortcut a span {
+    font-size: 1.6em;
+    font-weight: bold;
+    font-family: 'NIXGONM-Vb';
+}
+
+.main-banner .shortcut a i {
+    font-size: 2em;
+}
+
+.main-banner .shortcut a span:first-child {
+    display: block;
+    color: #547A55;
+}
+
+.main-banner .shortcut a span:last-child {
+    display: none;
+}
+
+.main-banner .shortcut a:hover span:first-child {
+    display: none;
+}
+
+.main-banner .shortcut a:hover span:last-child {
+    display: block;
+    color: #EEEEEE;
+}
+
+.main-banner .shortcut a:hover {
+    transform: scale(1.05);
+    box-shadow: 305px 0 0 0 rgba(0, 128, 0, 0.7) inset;
+}
+
+
+
+/* 바로가기 */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: #f9f9f9; */
+    text-align: center;
+    padding: 50px;
+}
+
+.main-content .main-greeting_main {
+    margin: 20px 0;
+}
+
+.main-content .main-greeting_sub {
+    font-family: 'Pretendard-Regular';
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.main-content ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.main-content ul li {
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0;
+}
+
+.main-content ul li a {
+    width: 100px;
+    height: 100px;
+    border: 0.5px solid rgba(128, 128, 128, 0.35);
+    border-radius: 30%;
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    transform: scale(1);
+    transition: transform 0.4s;
+    background-color: white;
+    box-shadow: 12px 12px 20px -12px rgba(0, 0, 0, 0.35);
+}
+
+.main-content ul li a:hover {
+    transform: scale(1.1);
+}
+
+.main-content ul li span {
+    font-family: 'TmoneyRoundWindExtraBold';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main-content ul li a img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+
+/* 공지사항 */
+.main-notice {
+    /* background-color: #f9f3ea; */
+    width: 800px;
+    margin: 20px auto 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-notice #main-notice-title-img {
+    font-size: 28px;
+}
+
+.main-notice #main-notice-title {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.main-notice span {
+    height: 50px;
+    border: 2px solid;
+}
+
+.main-notice .main-text-wrap {
+    text-align: left;
+    width: 500px;
+    height: 30px;
+    font-size: 20px;
+    overflow: hidden;
+    /* margin: 0 20px; */
+}
+
+.main-notice .main-text-wrap .text {
+    padding: 5px 10px;
+    font-weight: bold;
+    transform: translateY(0%);
+    transition: transform 1s;
+}
+
+.main-notice .main-text-wrap .text a:hover {
+    text-decoration: underline;
+}
+
+.main-notice .main-text-upDown i {
+    font-size: 30px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+
+
+/* 메인이미지 */
+.main-images {
+    padding: 70px 0;
+    background-color: rgb(243, 243, 236);
+    position: relative;
+}
+
+.slider_wrapper {
+    position: relative;
+    max-width: 100%;
+    width: 1560px;
+    margin: 0 auto;
+    height: 280px;
+    overflow: hidden;
+}
+
+.slides {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: left .5s ease-out;
+}
+
+.slides li:not(:last-child) {
+    float: left;
+    margin-right: 60px;
+}
+
+.slides li img {
+    width: 480px;
+    height: 280px;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform .5s;
+}
+
+.slides li:hover img {
+    transform: scale(1.1);
+}
+
+.main-images .moveBtn {
+    background-color: rgba(255, 255, 255, 0.719);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}
+
+.main-images .moveBtn:hover {
+    transform: translate(-50%, -50%);
+}
+
+.main-images .moveBtn i {
+    font-size: 30px;
+}
+
+.main-images #prev {
+    position: absolute;
+    top: 50%;
+    left: 4%;
+    transform: translate(-50%, -50%);
+
+}
+
+.main-images #next {
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    transform: translate(50%, -50%);
+
+}
+
+/* input radio */
+.main-images-input-radio {
+    background-color: rgb(243, 243, 236);
+    width: 100%;
+    padding: 20px 0 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-images-input-radio .input-radio-btn {
+    display: none;
+}
+
+.main-images-input-radio label {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    transform: scale(1);
+    transition: width .1s, transform .3s;
+    background-color: grey;
+    cursor: pointer;
+}
+
+.main-images-input-radio label:hover {
+    transform: scale(1.2);
+}
+
+.main-images-input-radio .input-radio-btn:checked+label {
+    width: 4%;
+    background-color: rgb(51, 45, 45);
+}
+
+/* footer */
+footer {
+    height: 20px;
+    background-color: #464646;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: rgb(253, 253, 253);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.church_number {
+    display: flex;
+    flex-direction: row;
+}
+
+.church_number p {
+    margin: 10px;
+}
+
+.church_address {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.church_address {
+    display: flex;
+    flex-direction: column;
+}
+
+.church_address p {
+    margin: 5px;
+}
