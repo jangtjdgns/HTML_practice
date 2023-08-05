@@ -1,61 +1,43 @@
-var upDownBtn = Array.from(document.getElementsByClassName("main-text-btn"));
-upDownBtn[2].style.display = "none"; // 먼저 시작 버튼 숨기기
+$(function () {
+    var textBtn = $('.main-text-btn');
+    textBtn.eq(2).hide(); // 시작 버튼 숨기기
+    var textY = 0;
+    var textTlY = ($('.text').length - 1) * -100;       // text 수 * 100 -> translateY
+    var repeatNotice = setInterval(noticeDown, 5000);   // 5초마다 반복
 
-var text = document.getElementsByClassName("text");
-var textY = 0;  // text translateY %
-var textMax = (text.length * 100) - 100;    // text 수
+    // 공지 버튼 클릭시
+    $('.main-text-btn').children().click(function () {
+        buttonCheckControl($(this).attr('id'));
+    });
 
-
-// 공지사항 5초마다 자동으로 넘김
-var startBtn = setInterval(noticeDown, 5000);
-
-function noticeUp() {
-    if (textY < 0) {
-        textY += 100;
-    } else {
-        textY = -textMax;
+    function buttonCheckControl(btn) {
+        if (btn == 'notice-up') {
+            return noticeUp();
+        } else if (btn == 'notice-down') {
+            return noticeDown();
+        } else if (btn == 'notice-play') {
+            textBtn.eq(1).show();
+            textBtn.eq(2).hide();
+            return repeatNotice = setInterval(noticeDown, 5000);
+        }
+        textBtn.eq(2).show();
+        textBtn.eq(1).hide();
+        return clearInterval(repeatNotice);
     }
-    return textTranslateY();
-}
 
-function noticeDown() {
-    if (textY > -textMax) {
-        textY -= 100;
-    } else {
-        textY = 0;
+    function noticeUp() {
+        textY < 0 ? textY += 100 : textY = textTlY;
+        return setTrnaslateY();
     }
 
-    return textTranslateY();
-}
-
-// up, down 체크
-upDownBtn.forEach(function (e) {
-    e.addEventListener("click", function () {
-        var play = e.children[0].className.slice(19, 29);
-        playCheck(play, e);
-    })
-})
-
-// up, down 체크후 이동
-function playCheck(play, e) {
-    if (play == 'caret-up') {
-        return noticeUp();
-    } else if (play == 'caret-down') {
-        return noticeDown();
-    } else if (play == 'play') {
-        upDownBtn[1].style.display = "block";
-        upDownBtn[2].style.display = "none";
-        return startBtn = setInterval(noticeDown, 5000);
-    } else {
-        upDownBtn[1].style.display = "none";
-        upDownBtn[2].style.display = "block";
-        return clearInterval(startBtn);
+    function noticeDown() {
+        textY > textTlY ? textY -= 100 : textY = 0;
+        return setTrnaslateY();
     }
-}
 
-// text transfrom 적용
-function textTranslateY() {
-    for (var y of text) {
-        y.style.transform = "translateY(" + textY + "%)";
+    function setTrnaslateY() {
+        $('.text').each(function () {
+            $(this).css("transform", "translateY(" + textY + "%)");
+        });
     }
-}
+});

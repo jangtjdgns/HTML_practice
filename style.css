@@ -46,8 +46,27 @@ body {
     height: auto;
 }
 
-/* header {} */
+.back_to_top {
+    text-align: center;
+}
 
+.back_to_top i {
+    position: fixed;
+    bottom: 3%;
+    right: 2%;
+    z-index: 99;
+    font-size: 80px;
+    border-radius: 50%;
+    color: #639265;
+    transition: all 0.3s;
+}
+
+.back_to_top:hover i {
+    color: #d1d1d1;
+    box-shadow: -60px 0 0 0 rgba(99, 146, 101, 0.7) inset;
+}
+
+/* header {} */
 header #top-header {
     font-family: 'twayair';
     margin: 13px 0;
@@ -160,11 +179,14 @@ header #header-sub ul li a:hover {
     text-decoration: underline;
 }
 
+
+
+
+
+/* index.html */
 /* main {
     background-color: #f9f9f9;
 } */
-
-
 
 /* 메인베너 */
 .main-banner {
@@ -360,7 +382,7 @@ header #header-sub ul li a:hover {
 /* 메인이미지 */
 .main-images {
     padding: 70px 0;
-    background-color: rgb(243, 243, 236);
+    /* background-color: rgb(243, 243, 236); */
     position: relative;
 }
 
@@ -398,7 +420,7 @@ header #header-sub ul li a:hover {
 }
 
 .main-images .moveBtn {
-    background-color: rgba(255, 255, 255, 0.719);
+    background-color: rgba(255, 255, 255, 0.75);
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -407,6 +429,7 @@ header #header-sub ul li a:hover {
     align-items: center;
     justify-content: center;
     z-index: 99;
+    border: 1px solid rgba(147, 147, 147, 0.75);
 }
 
 .main-images .moveBtn:hover {
@@ -435,7 +458,7 @@ header #header-sub ul li a:hover {
 
 /* input radio */
 .main-images-input-radio {
-    background-color: rgb(243, 243, 236);
+    /* background-color: rgb(243, 243, 236); */
     width: 100%;
     padding: 20px 0 50px 0;
     display: flex;
@@ -502,4 +525,131 @@ footer {
 
 .church_address p {
     margin: 5px;
+}
+
+
+
+
+
+
+/* ================================================= */
+/* 공통 */
+.title_wrap {
+    text-align: center;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    padding: 50px 0;
+}
+
+.title {
+    font-size: 50px;
+    font-weight: bold;
+    display: flex;
+    margin: 0 0 50px 0;
+    padding: 0 0 0 10%;
+}
+
+.title_wrap ul {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    /* background-color: #547A55; */
+    padding: 0 0 0 10%;
+}
+
+/* .main_title {} */
+
+.title_wrap li {
+    margin: 1px 10px 1px 0;
+    width: 200px;
+    height: 70px;
+    border: 2px solid;
+}
+
+.title_wrap a {
+    color: #547A55;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title_checked a,
+.subtitle_checked a {
+    color: #EEEEEE;
+}
+
+.title_wrap li:hover {
+    background-color: #547A55;
+}
+
+.title_wrap li:hover a {
+    color: #EEEEEE;
+}
+
+.title_wrap li:hover {
+    background-color: #3a553b;
+}
+
+.title_checked,
+.subtitle_checked {
+    background-color: #547A55;
+}
+
+/* <교회> */
+/* - 교회소개 */
+/* church_introduction.html */
+
+
+
+/* - 섬기는 사람들 */
+/* church_introduction.html */
+.committee_chart {
+    width: 60%;
+    margin: 50px auto;
+}
+
+.committee_chart .table_wrap {
+    margin: 100px 0 0 0;
+}
+
+.committee_chart h1 {
+    text-align: center;
+    font-size: 50px;
+    margin: 50px 0;
+    padding: 10px 0;
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+}
+
+.committee_chart h2 {
+    width: 90%;
+    font-size: 32px;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.committee_chart_table {
+    border-collapse: collapse;
+    width: 90%;
+    height: 220px;
+    text-align: center;
+    font-size: 24px;
+    margin: 0 auto;
+}
+
+.committee_chart_table tr th,
+.committee_chart_table tr td {
+    border: 2px solid;
+}
+
+.committee_chart_table tr th:first-child {
+    width: 25%;
+}
+
+.committee_chart_table tr td:first-child {
+    width: 10%;
 }
