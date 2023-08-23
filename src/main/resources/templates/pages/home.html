@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_main_layout}">
+
+<th:block layout:fragment="content">
+        <!-- 메인 배너 -->
+        <article class="main-banner">
+            <img src="/images/main-banner.png">
+            <div id="pray-shortcut" class="shortcut">
+                <a href="/churchMainTitleHTML/Communication/PrayerRequests/prayer_requests.html"><span>기 도 요
+                        청</span><span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+            </div>
+            <div id="directions-shortcut" class="shortcut">
+                <a href="/churchMainTitleHTML/Church/FacilityGuide/directions.html"><span>오 시 는 길</span><span><i
+                        class="fa-solid fa-arrow-right-long"></i></span></a>
+            </div>
+        </article>
+
+        <!-- 메인 콘텐츠 바로가기 -->
+        <article class="main-content">
+            <div>
+                <p class="main-greeting_main">WELCOME TO MAEPO CHURCH</p>
+                <p class="main-greeting_sub">매포교회 오신 여러분 환영합니다</p>
+            </div>
+            <ul>
+                <li><a href="/churchMainTitleHTML/Church/Minister/minister.html"><img
+                        src="/images/메인메뉴/목사.jpg"></a><span>교역자</span></li>
+                <li><a href="/churchMainTitleHTML/Worship/WorshipGuide/worship_guide.html"><img
+                        src="/images/메인메뉴/예배.jpg"></a><span>예배</span></li>
+                <li><a href="/churchMainTitleHTML/Communication/PrayerRequests/prayer_requests.html"><img
+                        src="/images/메인메뉴/기도.jpg"></a><span>기도</span></li>
+                <li><a href="/churchMainTitleHTML/Growth/EducationTraining/bible_writing.html"><img
+                        src="/images/메인메뉴/성경.jpg"></a><span>성경</span></li>
+                <li><a href="/churchMainTitleHTML/Worship/WorshipGuide/worship_bulletin.html"><img
+                        src="/images/메인메뉴/주보.jpg"></a><span>주보</span></li>
+                <li><a href="/churchMainTitleHTML/Communication/FriendshipNews/new_believers.html"><img
+                        src="/images/메인메뉴/새가족.jpg"></a><span>새가족</span></li>
+                <li><a href="/churchMainTitleHTML/Church/FacilityGuide/directions.html"><img
+                        src="/images/메인메뉴/오시는길.jpg"></a><span>오시는길</span></li>
+            </ul>
+        </article>
+
+        <!-- 메인 공지 -->
+        <article class="main-notice">
+            <p id="main-notice-title-img"><i class="fa-solid fa-bullhorn"></i></p>
+            <p id="main-notice-title">공지사항</p>
+            <span></span>
+            <div class="main-text-wrap">
+                <th:block th:each="announcements : ${announcements}">
+                    <p class="text"><a th:href="@{/church/소통/view(id=${announcements.id})}" th:text="${announcements.title}"></a></p>
+                </th:block>
+            </div>
+            <span></span>
+            <div class="main-text-upDown">
+                <p class="main-text-btn"><i id="notice-up" class="fa-solid fa-square-caret-up"></i></p>
+                <p class="main-text-btn"><i id="notice-stop" class="fa-solid fa-circle-stop"></i></p>
+                <p class="main-text-btn"><i id="notice-play" class="fa-solid fa-circle-play"></i></p>
+                <p class="main-text-btn"><i id="notice-down" class="fa-solid fa-square-caret-down"></i></p>
+            </div>
+        </article>
+
+        <!-- 메인 이미지 -->
+        <article class="main-images">
+            <span id="prev" class="moveBtn"><i class="fa-solid fa-chevron-left"></i></span>
+            <div class="slider_wrapper">
+                <ul class="slides">
+                    <li><a href="#"><img src="/images/메인사진/추억1.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억2.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억3.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억4.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억5.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억6.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억7.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억8.jpg" alt="img"></a></li>
+                    <li><a href="#"><img src="/images/메인사진/추억9.jpg" alt="img"></a></li>
+                </ul>
+            </div>
+            <span id="next" class="moveBtn"><i class="fa-solid fa-chevron-right"></i></span>
+        </article>
+        <div class="main-images-input-radio"></div>
+    <script type="text/javascript" th:src="@{/js/homeNotice.js}"></script>
+    <script type="text/javascript" th:src="@{/js/homeGallery.js}"></script>
+</th:block>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/default_main_layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block layout:fragment="content">
+    <article class="view-article-wrap">
+        <div class="view-title-container">
+            <div class="view-article-number" th:text="${announcements.id}"></div>
+            <div class="article-view-title" th:text="${announcements.title}"></div>
+            <div>
+                <div class="post-info">
+                    <p>작성자: </p>
+                    <p th:text="${announcements.author}"></p>
+                </div>
+                <div class="post-info">
+                    <p>조회수: </p>
+                    <p th:text="${announcements.hit}"></p>
+                </div>
+            </div>
+        </div>
+
+        <p th:text="${announcements.content}"></p>
+
+        <a class="article-write" th:href="@{/church/소통/modify/{id}(id=${announcements.id})}">수정</a>
+        <a class="article-write" th:href="@{/church/소통/delete(id=${announcements.id})}">삭제</a>
+    </article>
+</th:block>
+
+</html>

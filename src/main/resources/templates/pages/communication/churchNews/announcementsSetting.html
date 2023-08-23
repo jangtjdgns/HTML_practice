@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 설정 화면</title>
+    <style>
+        .table-wrap {
+            width: 60%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-rows: .2fr .8fr
+            grid-gap: 0;
+        }
+
+        .table-head {
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .table-body {
+            height: 500px;
+            overflow: auto;
+        }
+
+        .table-head, .table-body > div {
+            display: grid;
+            grid-template-columns: .1fr .1fr .6fr .2fr;
+            padding: 5px 0;
+            background-color: white;
+            transition: background .2s;
+        }
+
+        .table-body > div:nth-child(odd) {
+            background-color: #F0F0F0;
+        }
+
+        .table-body > div:hover{
+            background-color: #CFCFCF;
+        }
+
+
+        input[type=checkbox] {
+            transform : scale(0.5);
+        }
+
+        .button-wrap {
+            width: 60%;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .button-wrap button {
+            width: 30%;
+            height: 50px;
+            font-size: 26px;
+            font-weight: bold;
+            background-color: white;
+            border: 1px solid;
+            transition: background 0.2s;
+        }
+
+        .button-wrap button:hover {
+            background-color: #E0E0E0;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            isSelectedAll();
+            articleSize();
+
+            $("#selectedAll").change(function () {
+                if ($(this).prop("checked")) {
+                    $(".checkbox").prop("checked", true);
+                } else {
+                    $(".checkbox").prop("checked", false);
+                }
+            });
+
+            $(".checkbox").click(function (){
+                isSelectedAll();
+            });
+
+            // form 유효성 검사
+            $("form").submit(function (event){
+                if(!confirm("저장하시겠습니까?")){
+                    alert("취소합니다.");
+                    event.preventDefault();
+                    window.location.reload();
+                }
+
+                var isChecked = $(".checkbox:checked").length > 0;
+
+                if(!isChecked) {
+                    alert("최소 한개 이상의 공지사항을 선택하세요.");
+                    event.preventDefault();
+                }
+            });
+
+            $("#close-button").click(function(){
+                window.self.close();
+            });
+
+            function isSelectedAll() {
+                var selectedAll = $(".checkbox").length == $(".checkbox:checked").length;
+                $("#selectedAll").prop("checked", selectedAll);
+            }
+
+            function articleSize(){
+                var isPostCountAboveNine = $(".table-body>div").length > 9;
+                if(articleSize){
+                    $(".table-head").css({'width': 'calc(100% - 16px)'});
+                } else {
+                    $(".table-head").css({'width': '100%'});
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+<form action="/church/소통/listSetting" method="post">
+    <h2>공지 설정창</h2>
+    <div>
+        메인 홈페이지 공지사항란에 게시할 게시글을 선택해주세요. (최소 한개 이상)
+    </div>
+    <hr>
+
+    <div class="table-wrap">
+        <div class="table-head">
+            <input id="selectedAll" type="checkbox">
+            <p>No</p>
+            <p>제목</p>
+            <p>작성자</p>
+        </div>
+        <div class="table-body">
+            <div th:each="articleSet : ${articleSet}">
+                <input class="checkbox" type="checkbox" name="selectedBox" th:checked="${articleSet.isSelected}" th:value="${articleSet.id}">
+                <p th:text="${articleSet.id}"></p>
+                <p th:text="${articleSet.title}"></p>
+                <p th:text="${articleSet.author}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="button-wrap">
+        <button type="submit">저장</button>
+        <button id="close-button" type="button">닫기</button>
+    </div>
+</form>
+
+</body>
+</html>

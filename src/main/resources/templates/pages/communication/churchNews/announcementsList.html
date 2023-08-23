@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/default_main_layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block layout:fragment="content">
+    <article class="article-page-wrap">
+        <h1>공지사항</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>게시일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="announcements : ${list}">
+                    <td th:text="${announcements.id}"></td>
+                    <td>
+                        <a th:href="@{/church/소통/view(id=${announcements.id})}"
+                           th:text="${announcements.title}"></a>
+                    </td>
+                    <td th:text="${announcements.author}"></td>
+                    <td th:text="${#temporals.format(announcements.createdAt, 'yyyy.MM.dd. HH:mm')}"></td>
+                    <td th:text="${announcements.hit}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="article-setting-button">설정</button>
+        <button class="article-write-button" onclick="location.href='write';">글쓰기</button>
+        <div class="visible-pages-wrap">
+            <a class="start-end-page" th:href="@{/church/소통/list}"><i class="fa-solid fa-angles-left" style="color: #000000;"></i></a>
+            <a class="next-prev-page" th:href="@{/church/소통/list(page = ${currentPage-2})}"><i class="fa-solid fa-angle-left" style="color: #000000;"></i></a>
+            <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                <a class="unselected-page" th:href="@{/church/소통/list(page = ${page - 1})}" th:if="${page != currentPage}" th:text="${page}"></a>
+                <Strong class="selected-page" th:if="${page == currentPage}" th:text="${page}"></Strong>
+            </th:block>
+            <a class="next-prev-page" th:href="@{/church/소통/list(page = ${currentPage})}"><i class="fa-solid fa-angle-right" style="color: #000000;"></i></a>
+            <a class="start-end-page" th:href="@{/church/소통/list(page = ${totalPages - 1})}"><i class="fa-solid fa-angles-right" style="color: #000000;"></i></a>
+        </div>
+    </article>
+
+    <script type="text/javascript">
+        $(function(){
+            // 팝업창 열기
+            $(".article-setting-button").click(() => {
+                const url = "/church/소통/setting";
+                const name = "setting";
+                const option = "width=1200,height=900,top=200,left=250,location=no,toolbar=no,status=no,menubar=no,resizable=no";
+
+                window.open(url, name, option);
+            });
+        });
+    </script>
+</th:block>
+</html>
