@@ -1,6 +1,8 @@
 package com.maepo.church.repositoy;
 
 import com.maepo.church.entity.Announcements;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -36,4 +38,7 @@ public interface AnnouncementsRepository extends JpaRepository<Announcements, In
 
     // 메인 화면 공지사항란에 선택한 공지 출력
     List<Announcements> findByIsSelectedTrue();
+
+    // 검색
+    Page<Announcements> findByTitleContaining(String searchKeyword, Pageable pageable);
 }

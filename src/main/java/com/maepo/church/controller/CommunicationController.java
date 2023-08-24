@@ -43,9 +43,19 @@ public class CommunicationController {
 
     // 공지사항 목록
     @GetMapping("/list")
-    public String announcementsList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String announcementsList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                                    String searchKeyword) {
 
-        Page<Announcements> list = announcementsService.announcementsList(pageable);
+        Page<Announcements> list = null;
+
+
+        if(searchKeyword == null) {
+            list = announcementsService.announcementsList(pageable);
+        } else {
+            list = announcementsService.findByTitleContaining(searchKeyword, pageable);
+        }
+
+
 
         int maxVisiblePages = 7;                    // 보이는 페이지 수
         int maxVisiblePage = maxVisiblePages - 1;

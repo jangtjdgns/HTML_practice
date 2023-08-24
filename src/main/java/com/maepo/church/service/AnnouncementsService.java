@@ -65,4 +65,10 @@ public class AnnouncementsService {
 
         announcementsRepository.deleteById(id);
     }
+
+    // 게시글 제목 검색
+    public Page<Announcements> findByTitleContaining (String searchKeyword, Pageable pageable) {
+
+        return announcementsRepository.findByTitleContaining(searchKeyword, pageable);
+    }
 }
