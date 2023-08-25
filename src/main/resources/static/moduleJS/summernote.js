@@ -1,6 +1,6 @@
 $(function() {
     $('#summernote').summernote({
-        placeholder: '수정할 내용을 작성해주세요.',
+        placeholder: '내용을 입력해주세요.',
         height: 500,            // 에디터 높이
         minHeight: 300,         // 최소 높이
         maxHeight: 700,         // 최대 높이

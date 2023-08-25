@@ -10,7 +10,7 @@
 
 <th:block layout:fragment="content">
     <h1>글쓰기</h1>
-    <form th:action="@{/church/소통/notice-writePro}" method="post">
+    <form th:action="@{/church/소통/com-writePro}" method="post">
         <article class="article-layout">
             <div>
                 <p>제목</p>
@@ -25,6 +25,7 @@
                 <p>작성자</p>
                 <input name="author" type="text">
             </div>
+            <input type="hidden" name="hit" th:value="0">
             <button class="write-button" type="submit">작성</button>
         </article>
     </form>

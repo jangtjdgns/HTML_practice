@@ -20,7 +20,7 @@
                 <tr th:each="announcements : ${list}">
                     <td th:text="${announcements.id}"></td>
                     <td>
-                        <a th:href="@{/church/소통/view(id=${announcements.id})}"
+                        <a th:href="@{/church/소통/notice-view(id=${announcements.id})}"
                            th:text="${announcements.title}"></a>
                     </td>
                     <td th:text="${announcements.author}"></td>
@@ -32,22 +32,22 @@
     </article>
 
     <div class="visible-pages-wrap">
-        <a class="start-end-page" th:href="@{/church/소통/list(page = 0, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angles-left" style="color: #000000;"></i></a>
-        <a class="next-prev-page" th:href="@{/church/소통/list(page = ${currentPage-2}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angle-left" style="color: #000000;"></i></a>
+        <a class="start-end-page" th:href="@{/church/소통/notice-list(page = 0, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angles-left" style="color: #000000;"></i></a>
+        <a class="next-prev-page" th:href="@{/church/소통/notice-list(page = ${currentPage-2}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angle-left" style="color: #000000;"></i></a>
         <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <a class="unselected-page" th:href="@{/church/소통/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:if="${page != currentPage}" th:text="${page}"></a>
+            <a class="unselected-page" th:href="@{/church/소통/notice-list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:if="${page != currentPage}" th:text="${page}"></a>
             <Strong class="selected-page" th:if="${page == currentPage}" th:text="${page}"></Strong>
         </th:block>
-        <a class="next-prev-page" th:href="@{/church/소통/list(page = ${currentPage}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angle-right" style="color: #000000;"></i></a>
-        <a class="start-end-page" th:href="@{/church/소통/list(page = ${totalPages - 1}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angles-right" style="color: #000000;"></i></a>
+        <a class="next-prev-page" th:href="@{/church/소통/notice-list(page = ${currentPage}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angle-right" style="color: #000000;"></i></a>
+        <a class="start-end-page" th:href="@{/church/소통/notice-list(page = ${totalPages - 1}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angles-right" style="color: #000000;"></i></a>
     </div>
 
-    <form class="search-form" th:action="@{/church/소통/list}">
+    <form class="search-form" th:action="@{/church/소통/notice-list}">
         <div class="interaction-panel">
             <button type="button" class="article-setting-button">설정</button>
             <input type="text" name="searchKeyword">
             <button type="submit">검색</button>
-            <button type="button" class="article-write-button" onclick="location.href='write';">글쓰기</button>
+            <button type="button" class="article-write-button" onclick="location.href='notice-write';">글쓰기</button>
         </div>
     </form>
 
@@ -55,7 +55,7 @@
         $(function(){
             // 팝업창 열기
             $(".article-setting-button").click(() => {
-                const url = "/church/소통/setting";
+                const url = "/church/소통/notice-setting";
                 const name = "setting";
                 const option = "width=1200,height=800,top=100,left=250,location=no,toolbar=no,status=no,menubar=no,resizable=no";
 

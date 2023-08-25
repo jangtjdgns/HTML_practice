@@ -48,7 +48,7 @@
             <span></span>
             <div class="main-text-wrap">
                 <th:block th:each="announcements : ${announcements}">
-                    <p class="text"><a th:href="@{/church/소통/view(id=${announcements.id})}" th:text="${announcements.title}"></a></p>
+                    <p class="text"><a th:href="@{/church/소통/notice-view(id=${announcements.id})}" th:text="${announcements.title}"></a></p>
                 </th:block>
             </div>
             <span></span>

@@ -2,7 +2,7 @@ package com.maepo.church.controller;
 
 import com.maepo.church.dto.AnnouncementsDTO;
 import com.maepo.church.entity.Announcements;
-import com.maepo.church.service.AnnouncementsService;
+import com.maepo.church.service.CommAnnouncementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,45 +16,45 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/church/소통")
-public class CommunicationController {
+public class CommAnnouncementsController {
 
     @Autowired
-    private AnnouncementsService announcementsService;
+    private CommAnnouncementsService commAnnouncementsService;
+
+    private static final String URL = "/pages/communication/churchNews/";
 
     // 공지사항 글쓰기
-    @GetMapping("/write")
+    @GetMapping("/notice-write")
     public String announcementsWriteForm() {
 
-        return "/pages/communication/churchNews/announcementsWrite";
+        return URL + "announcementsWrite";
     }
 
     // 공지사항 글 작성 처리
-    @PostMapping("/writePro")
+    @PostMapping("/notice-writePro")
     public String announcements(AnnouncementsDTO announcementsDTO, Model model) {
         Announcements announcements = announcementsDTO.toEntity();
 
-        announcementsService.write(announcements);
+        commAnnouncementsService.write(announcements);
 
         model.addAttribute("message", "글 작성이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/church/소통/list");
+        model.addAttribute("searchUrl", "/church/소통/notice-list");
 
-        return "/pages/communication/churchNews/announcementsMessage";
+        return "/pages/communication/message";
     }
 
     // 공지사항 목록
-    @GetMapping("/list")
+    @GetMapping("/notice-list")
     public String announcementsList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                                     String searchKeyword) {
 
         Page<Announcements> list = null;
 
-
         if(searchKeyword == null) {
-            list = announcementsService.announcementsList(pageable);
+            list = commAnnouncementsService.postList(pageable);
         } else {
-            list = announcementsService.findByTitleContaining(searchKeyword, pageable);
+            list = commAnnouncementsService.findByTitleContaining(searchKeyword, pageable);
         }
-
 
 
         int maxVisiblePages = 7;                    // 보이는 페이지 수
@@ -82,80 +82,80 @@ public class CommunicationController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("totalPages", totalPages);
 
-        return "/pages/communication/churchNews/announcementsList";
+        return URL + "announcementsList";
     }
 
     // 공지사항 설정 -팝업창
-    @GetMapping("/setting")
+    @GetMapping("/notice-setting")
     public String announcementsSetting(Model model) {
 
-        model.addAttribute("articleSet", announcementsService.announcementsList());
+        model.addAttribute("articleSet", commAnnouncementsService.announcementsList());
 
 
-        return "/pages/communication/churchNews/announcementsSetting";
+        return URL + "announcementsSetting";
     }
 
-    @PostMapping("/listSetting")
+    @PostMapping("/notice-listSetting")
     public String listSettingForm(@RequestParam List<Integer> selectedBox, Model model) {
 
         // false로 is_selected 전부 초기화
-        announcementsService.resetSelected();
+        commAnnouncementsService.resetSelected();
 
         for (Integer id : selectedBox) {
-            announcementsService.updateIsSelectedById(id);
+            commAnnouncementsService.updateIsSelectedById(id);
         }
 
         model.addAttribute("message", "저장되었습니다.");
-        model.addAttribute("searchUrl", "/church/소통/setting");
+        model.addAttribute("searchUrl", "/church/소통/notice-setting");
 
-        return "/pages/communication/churchNews/announcementsMessage";
+        return "/pages/communication/message";
     }
 
 
     // 게시글 보기
-    @GetMapping("/view")
+    @GetMapping("/notice-view")
     public String announcementsView(Model model, Integer id) {
 
-        model.addAttribute("announcements", announcementsService.announcementsView(id));
+        model.addAttribute("announcements", commAnnouncementsService.postView(id));
 
-        announcementsService.incrementHit(id);
+        commAnnouncementsService.incrementHit(id);
 
-        return "/pages/communication/churchNews/announcementsView";
+        return URL + "announcementsView";
     }
 
 
     // 게시글 수정
-    @GetMapping("/modify/{id}")
+    @GetMapping("/notice-modify/{id}")
     public String announcementsModify(@PathVariable("id") Integer id, Model model){
 
-        model.addAttribute("announcements", announcementsService.announcementsView(id));
+        model.addAttribute("announcements", commAnnouncementsService.postView(id));
 
-        return "/pages/communication/churchNews/announcementsModify";
+        return URL + "announcementsModify";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/notice-update/{id}")
     public String announcementsUpdate(@PathVariable("id") Integer id, Announcements announcements, Model model) {
 
-        Announcements announcementsTemp = announcementsService.announcementsView(id);
+        Announcements announcementsTemp = commAnnouncementsService.postView(id);
         announcementsTemp.setTitle(announcements.getTitle());
         announcementsTemp.setContent(announcements.getContent());
         announcementsTemp.setAuthor(announcements.getAuthor());
 
-        announcementsService.write(announcementsTemp);
+        commAnnouncementsService.write(announcementsTemp);
 
         model.addAttribute("message", "수정되었습니다.");
-        model.addAttribute("searchUrl", "/church/소통/view?id=" + id);
+        model.addAttribute("searchUrl", "/church/소통/notice-view?id=" + id);
 
-        return "/pages/communication/churchNews/announcementsMessage";
+        return "/pages/communication/message";
     }
 
     // 삭제
-    @GetMapping("/delete")
+    @GetMapping("/notice-delete")
     public String announcementsDelete(Integer id){
 
-        announcementsService.announcementsDelete(id);
+        commAnnouncementsService.postDelete(id);
 
         // redirect 사용시 한글 url인 경우 인코딩 해야 리턴됨
-        return "redirect:/church/%EC%86%8C%ED%86%B5/list";
+        return "redirect:/church/%EC%86%8C%ED%86%B5/notice-list";
     }
 }

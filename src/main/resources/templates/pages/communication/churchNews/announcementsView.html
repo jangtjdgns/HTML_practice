@@ -22,14 +22,13 @@
 
         <p class="article-view-content"></p>
 
-        <a class="article-write" th:href="@{/church/소통/modify/{id}(id=${announcements.id})}">수정</a>
-        <a class="article-write" th:href="@{/church/소통/delete(id=${announcements.id})}">삭제</a>
+        <a class="article-write" th:href="@{/church/소통/notice-modify/{id}(id=${announcements.id})}">수정</a>
+        <a class="article-write" th:href="@{/church/소통/notice-delete(id=${announcements.id})}">삭제</a>
 
         <script th:inline="javascript">
             /*<![CDATA[*/
-            var content = [[${announcements.content}]];
-            console.log(content);
-            $(".article-view-content").html(content);
+                var content = [[${announcements.content}]];
+                $(".article-view-content").html(content);
             /*]]>*/
         </script>
     </article>
