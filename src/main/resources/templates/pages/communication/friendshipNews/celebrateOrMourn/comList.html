@@ -42,10 +42,13 @@
         <a class="start-end-page" th:href="@{/church/소통/com-list(page = ${totalPages - 1}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angles-right" style="color: #000000;"></i></a>
     </div>
 
-    <div class="interaction-panel">
-        <input type="text" name="searchKeyword">
-        <button type="submit">검색</button>
-        <button type="button" class="article-write-button" onclick="location.href='com-write';">글쓰기</button>
-    </div>
+    <form class="search-form" th:action="@{/church/소통/com-list}">
+        <div class="interaction-panel">
+            <input type="text" name="searchKeyword">
+            <button type="submit">검색</button>
+            <button type="button" class="article-write-button" onclick="location.href='com-write';">글쓰기</button>
+        </div>
+    </form>
+
 </th:block>
 </html>
