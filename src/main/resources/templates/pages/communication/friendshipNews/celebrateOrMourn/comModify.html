@@ -9,22 +9,23 @@
 </head>
 
 <th:block layout:fragment="content">
-    <h1>글쓰기</h1>
-    <form th:action="@{/church/소통/com-writePro}" method="post">
+    <h1>수정</h1>
+    <form th:action="@{/church/소통/com-update/{id}(id = ${com.id})}" method="post">
         <article class="article-layout">
             <div>
                 <p>제목</p>
-                <input name="title" type="text" />
+                <input name="title" type="text" th:value="${com.title}" />
             </div>
             <div>
                 <p class="input-content">내용</p>
-                <textarea id="summernote" name="content"></textarea>
+                <textarea id="summernote" name="content" th:text="${com.content}"></textarea>
                 <script type="text/javascript" th:src="@{/moduleJS/summernote.js}"></script>
             </div>
             <div class="last-div">
                 <p>작성자</p>
-                <input name="author" type="text">
+                <input name="author" type="text" th:value="${com.author}">
             </div>
+            <input type="hidden" name="hit" th:value="${com.hit}">
             <button class="write-button" type="submit">작성</button>
         </article>
     </form>

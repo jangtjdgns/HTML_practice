@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommFamilyEventService implements PostService<CelebrateOrMourn> {
+public class CommCelebrateOrMournService implements PostService<CelebrateOrMourn> {
 
     @Autowired
     private CelebrateOrMournRepository celebrateOrMournRepository;

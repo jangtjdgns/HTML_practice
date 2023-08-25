@@ -1,7 +1,7 @@
 package com.maepo.church.controller;
 
 import com.maepo.church.entity.CelebrateOrMourn;
-import com.maepo.church.service.CommFamilyEventService;
+import com.maepo.church.service.CommCelebrateOrMournService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/church/소통")
 public class CommCelebrateOrMournController {
     @Autowired
-    private CommFamilyEventService commFamilyEventService;
+    private CommCelebrateOrMournService commCelebrateOrMournService;
 
     private static final String URL = "/pages/communication/friendshipNews/celebrateOrMourn/";
 
@@ -31,9 +32,9 @@ public class CommCelebrateOrMournController {
         Page<CelebrateOrMourn> list = null;
 
         if(searchKeyword == null) {
-            list = commFamilyEventService.postList(pageable);
+            list = commCelebrateOrMournService.postList(pageable);
         } else {
-            list = commFamilyEventService.findByTitleContaining(searchKeyword, pageable);
+            list = commCelebrateOrMournService.findByTitleContaining(searchKeyword, pageable);
         }
 
         int maxVisiblePages = 7;                    // 보이는 페이지 수
@@ -74,18 +75,57 @@ public class CommCelebrateOrMournController {
     @PostMapping("/com-writePro")
     public String comPro(CelebrateOrMourn celebrateOrMourn, Model model){
 
-        commFamilyEventService.write(celebrateOrMourn);
+        commCelebrateOrMournService.write(celebrateOrMourn);
 
         model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/church/소통/com-list");
 
         return "/pages/communication/message";
     }
-    // 글삭제
-
-    // 글수정
 
     // 글보기
+    @GetMapping("/com-view")
+    public String comView(Model model, Integer id) {
 
-    // 제목검색
+        model.addAttribute("com", commCelebrateOrMournService.postView(id));
+
+        commCelebrateOrMournService.incrementHit(id);
+
+        return URL + "comView";
+    }
+
+    // 글삭제
+    @GetMapping("/com-delete")
+    public String comDelete(Integer id) {
+
+        commCelebrateOrMournService.postDelete(id);
+
+        return "redirect:/church/%EC%86%8C%ED%86%B5/com-list";
+    }
+
+    // 글수정
+    @GetMapping("/com-modify/{id}")
+    public String comModify(@PathVariable("id") Integer id, Model model) {
+
+        model.addAttribute("com", commCelebrateOrMournService.postView(id));
+
+        return URL + "comModify";
+    }
+
+    // 업데이트
+    @PostMapping("/com-update/{id}")
+    public String comUpdate(@PathVariable("id") Integer id, CelebrateOrMourn celebrateOrMourn, Model model){
+
+        CelebrateOrMourn celebrateOrMournTemp = commCelebrateOrMournService.postView(id);
+        celebrateOrMournTemp.setTitle(celebrateOrMourn.getTitle());
+        celebrateOrMournTemp.setContent(celebrateOrMourn.getContent());
+        celebrateOrMournTemp.setAuthor(celebrateOrMourn.getAuthor());
+
+        commCelebrateOrMournService.write(celebrateOrMournTemp);
+
+        model.addAttribute("message", "수정이 완료되었습니다.");
+        model.addAttribute("searchUrl", "/church/소통/com-view?id=" + id);
+
+        return "/pages/communication/message";
+    }
 }

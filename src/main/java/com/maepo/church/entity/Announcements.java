@@ -33,6 +33,7 @@ public class Announcements {
     // 엔티티 생성될 때 자동으로 호출됨
     @PrePersist
     protected void onCreate(){
+        hit = 0;
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }

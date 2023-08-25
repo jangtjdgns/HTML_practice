@@ -29,10 +29,12 @@ public class CelebrateOrMourn {
     // 엔티티 생성될 때 자동으로 호출됨
     @PrePersist
     protected void onCreate(){
+        hit = 0;
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 
+    // 엔티티 업데이트될 때 자동으로 호출됨
     @PreUpdate
     protected void onUpdate(){
         updatedAt = LocalDateTime.now();

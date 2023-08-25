@@ -25,6 +25,7 @@
                 <p>작성자</p>
                 <input name="author" type="text" th:value="${announcements.author}">
             </div>
+            <input name="hit" type="hidden" th:value="${announcements.hit}">
             <button class="write-button" type="submit">저장</button>
         </article>
     </form>

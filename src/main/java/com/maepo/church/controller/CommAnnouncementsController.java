@@ -1,6 +1,5 @@
 package com.maepo.church.controller;
 
-import com.maepo.church.dto.AnnouncementsDTO;
 import com.maepo.church.entity.Announcements;
 import com.maepo.church.service.CommAnnouncementsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,7 @@ public class CommAnnouncementsController {
 
     // 공지사항 글 작성 처리
     @PostMapping("/notice-writePro")
-    public String announcements(AnnouncementsDTO announcementsDTO, Model model) {
-        Announcements announcements = announcementsDTO.toEntity();
+    public String announcements(Announcements announcements, Model model) {
 
         commAnnouncementsService.write(announcements);
 
