@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+;
+
 @Controller
 @RequestMapping("/church/소통")
 public class CommCelebrateOrMournController {

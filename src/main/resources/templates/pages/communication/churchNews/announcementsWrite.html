@@ -19,7 +19,13 @@
             <div>
                 <p class="input-content">내용</p>
                 <textarea id="summernote" name="content"></textarea>
-                <script type="text/javascript" th:src="@{/moduleJS/summernote.js}"></script>
+                <script type="text/javascript" th:src="@{/moduleJS/summernote.js}">
+                    $('#summernote').summernote({
+                        height: 300,
+                        minHeight: 300,
+                        maxHeight: 700,
+                    )}
+                </script>
             </div>
             <div class="last-div">
                 <p>작성자</p>

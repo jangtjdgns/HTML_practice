@@ -4,29 +4,103 @@
       layout:decorate="~{layout/default_main_layout}">
 
 <head>
+    <style>
+        .required {
+            color: red;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 
 <th:block layout:fragment="content">
-    <h1>글쓰기</h1>
-    <form th:action="@{/church/소통/com-writePro}" method="post">
-        <article class="article-layout">
+    <h1>경조사 게시판</h1>
+    <form action="" method="post">
+        <article class="com-article">
             <div>
-                <p>제목</p>
-                <input name="title" type="text" />
+                <p>성명<span class="required">*</span></p>
+                <input type="text">
             </div>
             <div>
-                <p class="input-content">내용</p>
-                <textarea id="summernote" name="content"></textarea>
-                <script type="text/javascript" th:src="@{/moduleJS/summernote.js}"></script>
+                <p>직급<span class="required">*</span></p>
+                <select name="" id="church_officer">
+                    <option value="none">== 선택 ==</option>
+                    <option value="목사">목사</option>
+                    <option value="원로장로">원로장로</option>
+                    <option value="원로권사">원로권사</option>
+                    <option value="원로집사">원로집사</option>
+                    <option value="시무장로">시무장로</option>
+                    <option value="시무권사">시무권사</option>
+                    <option value="시무집사">시무집사</option>
+                    <option value="청년">청년</option>
+                </select>
             </div>
-            <div class="last-div">
-                <p>작성자</p>
-                <input name="author" type="text">
+            <div>
+                <p>경조사 구분<span class="required">*</span></p>
+                <select name="" id="occasion">
+                    <option value="경사" selected>경사</option>
+                    <option value="조사">조사</option>
+                </select>
             </div>
-            <button class="write-button" type="submit">작성</button>
+            <div>
+                <p>경조사 종류<span class="required">*</span></p>
+                <div class="celebrate-or-mourn-wrap">
+                    <div class="celebrate-wrap">
+                        <select name="" id="celebrate">
+                            <option value="none">== 선택 ==</option>
+                            <option value="결혼">결혼</option>
+                            <option value="승진">승진</option>
+                            <option value="출산">출산</option>
+                            <option value="기타">기타(직접입력)</option>
+                        </select>
+                    </div>
+                    <div class="mourn-wrap">
+                        <select name="" id="mourn">
+                            <option value="none">== 선택 ==</option>
+                            <option value="부고">부고</option>
+                            <option value="기타">기타(직접입력)</option>
+                        </select>
+                        <!-- 부고 선택시 disabled true -->
+                        <p>부고 구분</p>
+                        <select name="" id="condolence">
+                            <option value="none">== 선택 ==</option>
+                            <option value="본인상">본인상</option>
+                            <option value="부군상">부군상</option>
+                            <option value="부친상">부친상</option>
+                            <option value="모친상">모친상</option>
+                            <option value="조부상">조부상</option>
+                            <option value="조모상">조모상</option>
+                            <option value="시부상">시부상</option>
+                            <option value="시모상">시모상</option>
+                            <option value="자녀상">자녀상</option>
+                            <option value="형제상">형제상</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="user_input">
+                <p>기타 직접 입력</p>
+                <input type="text">
+            </div>
+            <div>
+                <p>경조사 일시</p>
+                <input type="datetime-local">
+            </div>
+            <div>
+                <p>경조사 장소</p>
+                <input type="text">
+            </div>
+            <div>
+                <p>세부 내용</p>
+                <div class="textarea-wrap">
+                    <textarea name="content" id="summernote"></textarea>
+                </div>
+
+            </div>
         </article>
+        <button type="submit">작성</button>
     </form>
+    <script type="text/javascript" th:src="@{/moduleJS/summernote.js}"></script>
+    <script type="text/javascript" th:src="@{/js/comWrite.js}"></script>
 </th:block>
 </html>
