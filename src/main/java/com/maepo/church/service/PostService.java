@@ -15,9 +15,8 @@ public interface PostService<Communication> {
 
     // 게시글 보기
     Communication postView(Integer id);
-    void incrementHit(Integer id);
 
     // 게시글 삭제
     void postDelete(Integer id);
-    Page<Communication> findByTitleContaining (String searchKeyword, Pageable pageable);
+
 }

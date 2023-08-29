@@ -9,12 +9,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/church/소통")
@@ -31,12 +30,27 @@ public class CommCelebrateOrMournController {
     public String comWriteForm(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                                String searchKeyword) {
 
+
+        List<CelebrateOrMourn> postList = commCelebrateOrMournService.postId();
+
+        for(CelebrateOrMourn celebrateOrMournItem : postList){
+
+            int id = celebrateOrMournItem.getId();
+
+            String getName = commCelebrateOrMournService.getOccasionType(id);
+
+            String getRoleDescription = commCelebrateOrMournService.getRoleDescription(id);
+
+            celebrateOrMournItem.setOccasionType(getName);
+            celebrateOrMournItem.setRoleDescription(getRoleDescription);
+        }
+
         Page<CelebrateOrMourn> list = null;
 
         if(searchKeyword == null) {
             list = commCelebrateOrMournService.postList(pageable);
         } else {
-            list = commCelebrateOrMournService.findByTitleContaining(searchKeyword, pageable);
+            list = commCelebrateOrMournService.findByNameContaining(searchKeyword, pageable);
         }
 
         int maxVisiblePages = 7;                    // 보이는 페이지 수
@@ -91,8 +105,6 @@ public class CommCelebrateOrMournController {
 
         model.addAttribute("com", commCelebrateOrMournService.postView(id));
 
-        commCelebrateOrMournService.incrementHit(id);
-
         return URL + "comView";
     }
 
@@ -119,9 +131,9 @@ public class CommCelebrateOrMournController {
     public String comUpdate(@PathVariable("id") Integer id, CelebrateOrMourn celebrateOrMourn, Model model){
 
         CelebrateOrMourn celebrateOrMournTemp = commCelebrateOrMournService.postView(id);
-        celebrateOrMournTemp.setTitle(celebrateOrMourn.getTitle());
-        celebrateOrMournTemp.setContent(celebrateOrMourn.getContent());
-        celebrateOrMournTemp.setAuthor(celebrateOrMourn.getAuthor());
+//        celebrateOrMournTemp.setTitle(celebrateOrMourn.getTitle());
+//        celebrateOrMournTemp.setContent(celebrateOrMourn.getContent());
+//        celebrateOrMournTemp.setAuthor(celebrateOrMourn.getAuthor());
 
         commCelebrateOrMournService.write(celebrateOrMournTemp);
 

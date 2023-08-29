@@ -17,23 +17,23 @@ import java.util.List;
 public interface AnnouncementsRepository extends JpaRepository<Announcements, Integer> {
 
     // 조회수 증가
-    @Query("update Announcements a "
-            + "set a.hit = a.hit + 1 "
-            + "where id = :id")
+    @Query("update Announcements a " +
+           "set a.hit = a.hit + 1 " +
+           "where id = :id")
     @Modifying
     void incrementHit(@Param("id") Integer id);
 
     // is_selected false로 초기화
-    @Query("update Announcements a "
-            + "set a.isSelected = false "   // entity 내의 변수명과 같아야함
-            + "where a.id > 0")
+    @Query("update Announcements a " +
+            "set a.isSelected = false " +   // entity 내의 변수명과 같아야함
+            "where a.id > 0")
     @Modifying
     void resetSelected();
 
 
-    @Query("update Announcements a "
-            + "set a.isSelected = true "
-            + "where id = :id")
+    @Query("update Announcements a " +
+            "set a.isSelected = true " +
+            "where id = :id")
     @Modifying
     void updateIsSelectedById(@Param("id") Integer id);
 

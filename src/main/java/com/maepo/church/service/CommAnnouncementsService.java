@@ -41,7 +41,6 @@ public class CommAnnouncementsService implements PostService<Announcements>{
 
     // 조회수 증가 -> @Query, @Modifying 사용시 @Transactional 사용해야함
     @Transactional
-    @Override
     public void incrementHit(Integer id) {
 
         announcementsRepository.incrementHit(id);
@@ -75,7 +74,7 @@ public class CommAnnouncementsService implements PostService<Announcements>{
     }
 
     // 게시글 제목 검색
-    @Override
+
     public Page<Announcements> findByTitleContaining (String searchKeyword, Pageable pageable) {
 
         return announcementsRepository.findByTitleContaining(searchKeyword, pageable);

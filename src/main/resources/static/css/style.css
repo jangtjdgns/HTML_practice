@@ -183,7 +183,7 @@ header #header-sub ul li a:hover {
 
 
 /* 게시글 리스트 */
-/* 모든 게시글 통일 */
+/* 게시글 목록 거의 통일 */
 .article-page-wrap {
     width: 80%;
     margin: 20px auto;
@@ -249,6 +249,7 @@ header #header-sub ul li a:hover {
 .selected-page{
     transform: scale(1.1);
     cursor: pointer;
+    z-index: 0;
 }
 
 .unselected-page:hover, .selected-page:hover{
@@ -913,20 +914,28 @@ footer {
     border-bottom: 1px solid #CCCCCC;
 }
 
+.user_input>p {
+    border-bottom: 1px solid #CCCCCC;
+}
+
 .com-article>div:first-child {
     border-top: 2px solid #125C2E;
 }
 
 .com-article>div>p,
 .mourn-wrap p {
-    display: grid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     font-size: 20px;
     font-weight: bold;
-    align-items: center;
-    text-align: center;
     border-right: 1px solid #CCCCCC;
     background-color: #F3F7F4;
+}
+
+.com-article>div>p>.required
+    display: inline-block;
 }
 
 .mourn-wrap p {
@@ -934,11 +943,12 @@ footer {
 }
 
 .com-article input,
-.com-article .celebrate-or-mourn-wrap,
 .com-article select {
     height: 70%;
     font-size: 18px;
     padding: 0 12px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 
 .com-article input,
@@ -958,6 +968,7 @@ footer {
 
 
 .celebrate-wrap {
+    display: grid;
     height: 100%;
     align-items: center;
 }

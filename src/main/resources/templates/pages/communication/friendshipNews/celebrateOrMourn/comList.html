@@ -3,29 +3,82 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <style>
+        .article-page-wrap tr {
+            display: grid;
+            grid-template-columns: .1fr .3fr .1fr .1fr .4fr;
+            grid-gap: 0;
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(207, 207, 207, 0.5);
+            z-index: 3;
+        }
+
+        #modal .modal_content{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            width: 40%;
+            height: 80%;
+            z-index: 2;
+        }
+    </style>
+</head>
+
 <th:block layout:fragment="content">
+    <div id="modal">
+        <div class="modal_content">
+            <h1>경조사 세부사항</h1>
+            <hr />
+            <div class="test"></div>
+            <button class="close-modal">닫기</button>
+        </div>
+    </div>
     <article class="article-page-wrap">
         <h1>경조사</h1>
         <table>
             <thead>
             <tr>
                 <th>No</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>게시일</th>
-                <th>조회수</th>
+                <th>이름</th>
+                <th>구분</th>
+                <th>경조사 종류</th>
+                <th>장소/일시</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="com : ${list}">
-                <td th:text="${com.id}"></td>
+                <td class="com-id" th:text="${com.id}"></td>
+
+                <!-- 이름 (직분) -->
                 <td>
-                    <a th:href="@{/church/소통/com-view(id=${com.id})}"
-                       th:text="${com.title}"></a>
+<!--                    <a th:href="@{/church/소통/com-view(id=${com.id})}"-->
+<!--                       th:text="|${com.name} (${com.roleDescription})|"></a>-->
+                    <p class="open-modal" th:text="|${com.name} (${com.roleDescription})|"></p>
                 </td>
-                <td th:text="${com.author}"></td>
-                <td th:text="${#temporals.format(com.createdAt, 'yyyy.MM.dd. HH:mm')}"></td>
-                <td th:text="${com.hit}"></td>
+
+                <!-- 구분 -->
+                <td th:text="${com.occasionType}"></td>
+
+                <!-- 경조사 종류 -->
+                <td th:text="${com.celebrateName}" th:if="${com.celebrateName != 'none' and com.celebrateName != '기타'}"></td>
+                <td th:text="${com.mournName}" th:if="${com.mournName != 'none' and com.mournName != '기타'}"></td>
+                <td th:text="${com.customInput}" th:if="${com.mournName == '기타' or com.celebrateName == '기타'}"></td>
+
+                <!-- 장소/일시 -->
+                <td th:text="|${com.occasionVenue} / ${#temporals.format(com.occasionDate, 'yyyy.MM.dd. HH:mm')}|" th:if="${com.occasionVenue != '' and com.occasionDate != null}"></td>
+                <td th:text="${com.occasionVenue}" th:if="${com.occasionVenue != '' and com.occasionDate == null}"></td>
+                <td th:text="${#temporals.format(com.occasionDate, 'yyyy.MM.dd. HH:mm')}" th:if="${com.occasionVenue == '' and com.occasionDate != null}"></td>
             </tr>
             </tbody>
         </table>
@@ -36,7 +89,7 @@
         <a class="next-prev-page" th:href="@{/church/소통/com-list(page = ${currentPage-2}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angle-left" style="color: #000000;"></i></a>
         <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
             <a class="unselected-page" th:href="@{/church/소통/com-list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:if="${page != currentPage}" th:text="${page}"></a>
-            <Strong class="selected-page" th:if="${page == currentPage}" th:text="${page}"></Strong>
+            <strong class="selected-page" th:if="${page == currentPage}" th:text="${page}"></strong>
         </th:block>
         <a class="next-prev-page" th:href="@{/church/소통/com-list(page = ${currentPage}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angle-right" style="color: #000000;"></i></a>
         <a class="start-end-page" th:href="@{/church/소통/com-list(page = ${totalPages - 1}, searchKeyword = ${param.searchKeyword})}"><i class="fa-solid fa-angles-right" style="color: #000000;"></i></a>
@@ -53,5 +106,6 @@
         </div>
     </form>
 
+    <script type="text/javascript" th:src="@{/js/comList.js}"></script>
 </th:block>
 </html>

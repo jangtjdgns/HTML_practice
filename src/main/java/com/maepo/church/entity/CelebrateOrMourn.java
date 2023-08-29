@@ -1,5 +1,6 @@
 package com.maepo.church.entity;
 
+import com.maepo.church.controller.CommCelebrateOrMournController;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,26 +11,37 @@ import java.time.LocalDateTime;
 public class CelebrateOrMourn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id;                         // 경조사 게시글 번호
 
-    private String title;
+    private String name;                        // 작성자
 
-    private String content;
+    private Integer churchOfficerId;            // 직분
 
-    private String author;
+    private Integer occasionId;                 // 경조사 구분 id
 
-    private Integer hit;
+    private String celebrateName;               // 경사 종류
+
+    private String mournName;                   // 조사 종류
+
+    private Integer condolenceId;               // 조사 부고 종류
+
+    private String customInput;                 // 직접 입력한 텍스트
+
+    private String occasionVenue;               // 경조사 장소
+
+    private String content;                     // 세부 내용
+
+    private LocalDateTime occasionDate;         // 경조사 일시
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt;            // 작성 시간
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;            // 업데이트 시간
 
     // 엔티티 생성될 때 자동으로 호출됨
     @PrePersist
     protected void onCreate(){
-        hit = 0;
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
@@ -39,4 +51,12 @@ public class CelebrateOrMourn {
     protected void onUpdate(){
         updatedAt = LocalDateTime.now();
     }
+
+
+    // join
+    @Transient
+    private String occasionType;                // occasion 조인
+
+    @Transient
+    private String roleDescription;             // church_officer 조인
 }

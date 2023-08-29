@@ -8,6 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CommCelebrateOrMournService implements PostService<CelebrateOrMourn> {
 
@@ -40,16 +43,20 @@ public class CommCelebrateOrMournService implements PostService<CelebrateOrMourn
         return celebrateOrMournRepository.findAll(pageable);
     }
 
-    @Transactional
-    @Override
-    public void incrementHit(Integer id) {
-
-        celebrateOrMournRepository.incrementHit(id);
+    // 리스트 전부 가져오기
+    public List<CelebrateOrMourn> postId() {
+        return celebrateOrMournRepository.findAll();
     }
 
-    @Override
-    public Page<CelebrateOrMourn> findByTitleContaining (String searchKeyword, Pageable pageable) {
+    // OccasionType(경조사 구분) 가져오기
+    public String getOccasionType(Integer id){ return celebrateOrMournRepository.getOccasionType(id); }
 
-        return celebrateOrMournRepository.findByTitleContaining(searchKeyword, pageable);
+    // roleDescription(직분) 가져오기
+    public String getRoleDescription(Integer id){ return celebrateOrMournRepository.getRoleDescription(id); }
+
+    // 페이지 리스트 가져오기
+    public Page<CelebrateOrMourn> findByNameContaining (String searchKeyword, Pageable pageable) {
+
+        return celebrateOrMournRepository.findByNameContaining(searchKeyword, pageable);
     }
 }
