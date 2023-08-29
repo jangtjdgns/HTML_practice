@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +38,11 @@ public class CommCelebrateOrMournController {
 
             int id = celebrateOrMournItem.getId();
 
-            String getName = commCelebrateOrMournService.getOccasionType(id);
+            String getOccasionType = commCelebrateOrMournService.getOccasionType(id);
 
             String getRoleDescription = commCelebrateOrMournService.getRoleDescription(id);
 
-            celebrateOrMournItem.setOccasionType(getName);
+            celebrateOrMournItem.setOccasionType(getOccasionType);
             celebrateOrMournItem.setRoleDescription(getRoleDescription);
         }
 
@@ -99,13 +100,36 @@ public class CommCelebrateOrMournController {
         return "/pages/communication/message";
     }
 
-    // 글보기
-    @GetMapping("/com-view")
-    public String comView(Model model, Integer id) {
+    // comList ajax 요청으로 id 값을 받은 후 해당 id를 가진 엔티티 리턴
+    @GetMapping("/getComEntity")
+    public ResponseEntity<CelebrateOrMourn> getComEntityById(@RequestParam("id") Integer id) {
 
-        model.addAttribute("com", commCelebrateOrMournService.postView(id));
+        // id와 일치하는 CelebrateOrMourn 엔티티 가져오기
+        CelebrateOrMourn comEntity = commCelebrateOrMournService.postView(id);
 
-        return URL + "comView";
+        // Occasion 앤티티에서 OccasionType 가져오기
+        String getOccasionType = commCelebrateOrMournService.getOccasionType(id);
+
+        // churchOfficer 엔티티에서 RoleDescription 가져오기
+        String getRoleDescription = commCelebrateOrMournService.getRoleDescription(id);
+
+        // Condolence 엔티티에서 CondolenceName 가져오기
+        String getCondolenceName = commCelebrateOrMournService.getCondolenceName(id);
+
+        // 가져온 OccasionType set
+        comEntity.setOccasionType(getOccasionType);
+
+        // 가져온 RoleDescription set
+        comEntity.setRoleDescription(getRoleDescription);
+
+        // 가져온 CondolenceName set
+        comEntity.setCondolenceName(getCondolenceName);
+
+        if(comEntity != null){
+            return ResponseEntity.ok(comEntity);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // 글삭제

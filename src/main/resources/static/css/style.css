@@ -41,6 +41,12 @@ a {
     text-decoration: none;
 }
 
+/* summernote */
+.note-editable>p {
+    padding: 3px 0;
+}
+
+
 body {
     line-height: 1;
     width: 100%;

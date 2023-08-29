@@ -27,4 +27,10 @@ public interface CelebrateOrMournRepository extends JpaRepository<CelebrateOrMou
             "LEFT JOIN ChurchOfficer AS co ON cm.churchOfficerId = co.id " +
             "WHERE cm.id = :id")
     String getRoleDescription(@Param("id") Integer id);
+
+    @Query ("SELECT c.condolenceName " +
+            "FROM CelebrateOrMourn AS cm " +
+            "LEFT JOIN Condolence AS c ON cm.condolenceId = c.id " +
+            "WHERE cm.id = :id")
+    String getCondolenceName(@Param("id") Integer id);
 }

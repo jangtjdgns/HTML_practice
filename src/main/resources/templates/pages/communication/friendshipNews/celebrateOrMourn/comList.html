@@ -18,30 +18,136 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(207, 207, 207, 0.5);
+            background-color: rgba(0, 0, 0, 0.3);
             z-index: 3;
         }
 
-        #modal .modal_content{
+        #modal .modal-content{
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
-            width: 40%;
+            width: 35%;
             height: 80%;
             z-index: 2;
+            display: grid;
+            grid-template-rows: 10% auto 15%;
         }
+
+        #modal h1 {
+            background-color: #175C30;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            font-size: 24px;
+        }
+
+        #modal .com-info-wrap {
+            margin: 40px 20px 0 20px;
+        }
+
+        #modal .com-info-wrap table {
+            border-collapse: 0;
+            border-spacing: 0;
+            text-align: left;
+            border-top: 2px solid #175C30;
+            table-layout: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        #modal .com-info-wrap td {
+            padding: 10px;
+            border-bottom: 1px solid #CCCCCC;
+        }
+
+        #modal .com-info-wrap td:first-child {
+            width: 30%;
+            height: 10%;
+            text-align: center;
+            border-right: 1px solid #CCCCCC;
+            background-color: #F3F7F4;
+        }
+
+        #modal .com-info-wrap .com-info7 div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #modal .com-info-wrap .com-info7 p {
+            width: 100%;
+            padding: 3px 0;
+        }
+
+        #modal .modal-btn-wrap {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            padding: 0 20px;
+        }
+
+        #modal .modal-btn-wrap button {
+            width: 16%;
+            height: 50%;
+            margin-left: 10px;
+            font-size: 18px;
+            border: 1px solid;
+            background-color: white;
+        }
+
+        #modal .modal-btn-wrap button:hover{
+            cursor: pointer;
+            background-color: #175C30;
+            color: white;
+        }
+
     </style>
 </head>
 
 <th:block layout:fragment="content">
     <div id="modal">
-        <div class="modal_content">
+        <div class="modal-content">
             <h1>경조사 세부사항</h1>
-            <hr />
-            <div class="test"></div>
-            <button class="close-modal">닫기</button>
+            <div class="com-info-wrap">
+                <table>
+                        <tr>
+                            <td>대상자 성명</td>
+                            <td class="com-info1"></td>     <!-- 대상자 성명 + 직분 -->
+                        </tr>
+                        <tr>
+                            <td>경조사 구분</td>
+                            <td class="com-info2"></td>     <!-- 경조사 구분 -->
+                        </tr>
+                        <tr>
+                            <td>경조사 종류</td>
+                            <td class="com-info3"></td>     <!-- 경조사 종류 -->
+                        </tr>
+                        <tr>
+                            <td>경조사 종류 상세</td>
+                            <td class="com-info4"></td>     <!-- 경조사 종류 상세 -->
+                        </tr>
+                        <tr>
+                            <td>경조사 일시</td>
+                            <td class="com-info5"></td>     <!-- 경조사 일시 -->
+                        </tr>
+                        <tr>
+                            <td>경조사 장소</td>
+                            <td class="com-info6"></td>     <!-- 경조사 장소 -->
+                        </tr>
+                        <tr>
+                            <td>기타 세부 내용</td>
+                            <td class="com-info7"><div></div></td>     <!-- 기타 세부 내용 -->
+                        </tr>
+                </table>
+            </div>
+            <div class="modal-btn-wrap">
+                <button class="modify-modal">수정</button>
+                <button class="close-modal">확인</button>
+            </div>
         </div>
     </div>
     <article class="article-page-wrap">
@@ -62,9 +168,8 @@
 
                 <!-- 이름 (직분) -->
                 <td>
-<!--                    <a th:href="@{/church/소통/com-view(id=${com.id})}"-->
-<!--                       th:text="|${com.name} (${com.roleDescription})|"></a>-->
                     <p class="open-modal" th:text="|${com.name} (${com.roleDescription})|"></p>
+                    <input class="name-id" type="hidden" th:value="${com.id}">
                 </td>
 
                 <!-- 구분 -->
@@ -79,6 +184,7 @@
                 <td th:text="|${com.occasionVenue} / ${#temporals.format(com.occasionDate, 'yyyy.MM.dd. HH:mm')}|" th:if="${com.occasionVenue != '' and com.occasionDate != null}"></td>
                 <td th:text="${com.occasionVenue}" th:if="${com.occasionVenue != '' and com.occasionDate == null}"></td>
                 <td th:text="${#temporals.format(com.occasionDate, 'yyyy.MM.dd. HH:mm')}" th:if="${com.occasionVenue == '' and com.occasionDate != null}"></td>
+                <td th:if="${com.occasionVenue == '' and com.occasionDate == null}">-</td>
             </tr>
             </tbody>
         </table>
@@ -97,12 +203,9 @@
 
     <form class="search-form" th:action="@{/church/소통/com-list}">
         <div class="interaction-panel">
-            <select name="" id="">
-
-            </select>
             <input type="text" name="searchKeyword">
             <button type="submit">검색</button>
-            <button type="button" class="article-write-button" onclick="location.href='com-write';">글쓰기</button>
+            <button type="button" class="article-write-button" onclick="location.href='com-write';">등록</button>
         </div>
     </form>
 

@@ -59,4 +59,7 @@ public class CelebrateOrMourn {
 
     @Transient
     private String roleDescription;             // church_officer 조인
+
+    @Transient
+    private String condolenceName;              // condolence 조인
 }

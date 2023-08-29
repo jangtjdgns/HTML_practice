@@ -48,15 +48,20 @@ public class CommCelebrateOrMournService implements PostService<CelebrateOrMourn
         return celebrateOrMournRepository.findAll();
     }
 
-    // OccasionType(경조사 구분) 가져오기
-    public String getOccasionType(Integer id){ return celebrateOrMournRepository.getOccasionType(id); }
-
-    // roleDescription(직분) 가져오기
-    public String getRoleDescription(Integer id){ return celebrateOrMournRepository.getRoleDescription(id); }
-
     // 페이지 리스트 가져오기
     public Page<CelebrateOrMourn> findByNameContaining (String searchKeyword, Pageable pageable) {
 
         return celebrateOrMournRepository.findByNameContaining(searchKeyword, pageable);
     }
+
+
+
+    // OccasionType(경조사 구분)
+    public String getOccasionType(Integer id){ return celebrateOrMournRepository.getOccasionType(id); }
+
+    // roleDescription(직분)
+    public String getRoleDescription(Integer id){ return celebrateOrMournRepository.getRoleDescription(id); }
+
+    //CondolenceName(부고 상세명)
+    public String getCondolenceName(Integer id){ return celebrateOrMournRepository.getCondolenceName(id); }
 }
