@@ -1,4 +1,6 @@
 $(function () {
+    var callFcCount = 0; // 초반 실행 시 함수 호출 횟수 -> 업데이트 시 customInput 값을 지정하기 위함 4번 실행됨 -> 최대 4
+
     showCelebrateOrMourn();
     selectedCondolence();
     showUserInput();
@@ -13,7 +15,6 @@ $(function () {
 
     $("#mourn").change(function () {
         selectedCondolence();
-        console.log($(this).val());
     });
 
     $("#com-name").change(function(){
@@ -25,7 +26,7 @@ $(function () {
     $("#celebrate").change(function(){
         $(this).css("borderColor", "black");
     });
-    $("#morun").change(function(){
+    $("#mourn").change(function(){
         $(this).css("borderColor", "black");
     });
     $("#condolence").change(function(){
@@ -71,17 +72,24 @@ $(function () {
     }
 
     function selectedCondolence() {
-        $(".user_input>input").val("");
+        if(callFcCount == 4){                       // 함수 호출 횟수가 4이면 customInput 값 초기화
+            $(".user_input>input").val("");
+        }
+
         if ($("#mourn").val() == "부고") {
             $("#condolence").prop("disabled", false);
         } else {
             $("#condolence").prop("disabled", true);
-            $("#condolence").val("1");               // condolence, none == 1
+            $("#condolence").val("1");              // condolence, none == 1
         }
+        callFcCount < 4 ? callFcCount++ : callFcCount;  // 함수 호출 횟수 증가 최대 4까지
     }
 
     function showUserInput() {
-        $(".user_input>input").val("");
+        if(callFcCount == 4){                          // 함수 호출 횟수가 4이면 customInput 값 초기화
+            $(".user_input>input").val("");
+        }
+
         if ($("#celebrate").val() === "기타" || $("#mourn").val() === "기타") {
             $(".user_input").css(
                 {
@@ -97,6 +105,7 @@ $(function () {
                 }
             );
         }
+        callFcCount < 4 ? callFcCount++ : callFcCount;      // 함수 호출 횟수 증가 최대 4까지
     }
 
     $("form").submit(function (event){
@@ -119,7 +128,7 @@ $(function () {
     function required(){
         var isFieldEmpty = false;
 
-        $("#com-name").add($("#church_officer")).add($("#celebrate")).add($("#morun")).add($("#condolence")).css("borderColor", "black");
+        $("#com-name").add($("#church_officer")).add($("#celebrate")).add($("#mourn")).add($("#condolence")).css("borderColor", "black");
 
         // 성명란 비었을 때
         if(!$("#com-name").val()){

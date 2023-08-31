@@ -1,4 +1,5 @@
 $(function(){
+
     // 모달창 =====================================
     $(".open-modal").click(function(){
         const $id = $(this).next().val();
@@ -27,6 +28,9 @@ $(function(){
 
     // 모달 창에 값 넣기
     function processFetchedEntityData(entity){
+
+        // 수정 버튼
+        $('.modify-modal').attr("onclick", `location.href="com-modify/${entity.id}"`);
 
         // 1. 대상자 성명 + 직분
         $(".com-info1").text(`${entity.name} ${entity.roleDescription}`);

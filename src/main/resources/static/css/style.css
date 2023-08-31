@@ -189,6 +189,11 @@ header #header-sub ul li a:hover {
 
 
 /* 게시글 리스트 */
+/* 필수 작성 부분 표시 */
+.required {
+    color: red;
+}
+
 /* 게시글 목록 거의 통일 */
 .article-page-wrap {
     width: 80%;

@@ -9,25 +9,91 @@
 </head>
 
 <th:block layout:fragment="content">
-    <h1>수정</h1>
-    <form th:action="@{/church/소통/com-update/{id}(id = ${com.id})}" method="post">
-        <article class="article-layout">
+    <h1>경조사 게시판</h1>
+    <form th:action="@{/church/소통/com-update/{id}(id=${com.id})}" method="post">
+        <article class="com-article">
             <div>
-                <p>제목</p>
-                <input name="title" type="text" th:value="${com.title}" />
+                <p>성명<span class="required">*</span></p>
+                <input id="com-name" name="name" type="text" th:value="${com.name}">
             </div>
             <div>
-                <p class="input-content">내용</p>
-                <textarea id="summernote" name="content" th:text="${com.content}"></textarea>
-                <script type="text/javascript" th:src="@{/moduleJS/summernote.js}"></script>
+                <p>직급<span class="required">*</span></p>
+                <select name="churchOfficerId" id="church_officer">
+                    <option th:value="1" th:selected="${1 == com.churchOfficerId}">== 선택 ==</option>
+                    <option th:value="2" th:selected="${2 == com.churchOfficerId}">목사</option>
+                    <option th:value="3" th:selected="${3 == com.churchOfficerId}">장로</option>
+                    <option th:value="4" th:selected="${4 == com.churchOfficerId}">권사</option>
+                    <option th:value="5" th:selected="${5 == com.churchOfficerId}">집사</option>
+                    <option th:value="6" th:selected="${6 == com.churchOfficerId}">청년</option>
+                    <option th:value="7" th:selected="${7 == com.churchOfficerId}">전도사</option>
+                </select>
             </div>
-            <div class="last-div">
-                <p>작성자</p>
-                <input name="author" type="text" th:value="${com.author}">
+            <div>
+                <p>경조사 구분<span class="required">*</span></p>
+                <select name="occasionId" id="occasion">
+                    <option th:value="1" th:selected="${1 == com.occasionId}">경사</option>
+                    <option th:value="2" th:selected="${2 == com.occasionId}">조사</option>
+                </select>
             </div>
-            <input type="hidden" name="hit" th:value="${com.hit}">
-            <button class="write-button" type="submit">작성</button>
+            <div>
+                <p>경조사 종류<span class="required">*</span></p>
+                <div class="celebrate-or-mourn-wrap">
+                    <div class="celebrate-wrap">
+                        <select name="celebrateName" id="celebrate">
+                            <option th:value="none" th:selected="${'none' == com.celebrateName}">== 선택 ==</option>
+                            <option th:value="결혼" th:selected="${'결혼' == com.celebrateName}">결혼</option>
+                            <option th:value="승진" th:selected="${'승진' == com.celebrateName}">승진</option>
+                            <option th:value="출산" th:selected="${'출산' == com.celebrateName}">출산</option>
+                            <option th:value="기타" th:selected="${'기타' == com.celebrateName}">기타(직접입력)</option>
+                        </select>
+                    </div>
+                    <div class="mourn-wrap">
+                        <select name="mournName" id="mourn">
+                            <option th:value="none" th:selected="${'none' == com.mournName}">== 선택 ==</option>
+                            <option th:value="부고" th:selected="${'부고' == com.mournName}">부고</option>
+                            <option th:value="기타" th:selected="${'기타' == com.mournName}">기타(직접입력)</option>
+                        </select>
+
+                        <!-- 부고 선택시 disabled true -->
+                        <p>부고 구분</p>
+                        <select name="condolenceId" id="condolence">
+                            <option th:value="1" th:selected="${1 == com.condolenceId}">== 선택 ==</option>
+                            <option th:value="2" th:selected="${2 == com.condolenceId}">본인상</option>
+                            <option th:value="3" th:selected="${3 == com.condolenceId}">부군상</option>
+                            <option th:value="4" th:selected="${4 == com.condolenceId}">부친상</option>
+                            <option th:value="5" th:selected="${5 == com.condolenceId}">모친상</option>
+                            <option th:value="6" th:selected="${6 == com.condolenceId}">조부상</option>
+                            <option th:value="7" th:selected="${7 == com.condolenceId}">조모상</option>
+                            <option th:value="8" th:selected="${8 == com.condolenceId}">시부상</option>
+                            <option th:value="9" th:selected="${9 == com.condolenceId}">시모상</option>
+                            <option th:value="10" th:selected="${10 == com.condolenceId}">자녀상</option>
+                            <option th:value="11" th:selected="${11 == com.condolenceId}">형제상</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="user_input">
+                <p>기타 직접 입력</p>
+                <input class="customInput" name="customInput" type="text" th:value="${com.customInput}">
+            </div>
+            <div>
+                <p>경조사 일시</p>
+                <input name="occasionDate" type="datetime-local" th:value="${com.occasionDate}">
+            </div>
+            <div>
+                <p>경조사 장소</p>
+                <input name="occasionVenue" type="text" th:value="${com.occasionVenue}">
+            </div>
+            <div>
+                <p>기타 세부 내용</p>
+                <div class="textarea-wrap">
+                    <textarea name="content" id="summernote" th:text="${com.content}"></textarea>
+                </div>
+            </div>
         </article>
+        <button type="submit">수정</button>
     </form>
+    <script type="text/javascript" th:src="@{/moduleJS/summernote.js}"></script>
+    <script type="text/javascript" th:src="@{/js/comWrite.js}"></script>
 </th:block>
 </html>

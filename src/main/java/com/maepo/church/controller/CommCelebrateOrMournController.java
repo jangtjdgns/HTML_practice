@@ -132,14 +132,14 @@ public class CommCelebrateOrMournController {
         }
     }
 
-    // 글삭제
-    @GetMapping("/com-delete")
-    public String comDelete(Integer id) {
-
-        commCelebrateOrMournService.postDelete(id);
-
-        return "redirect:/church/%EC%86%8C%ED%86%B5/com-list";
-    }
+    // 글삭제 후에 관리자만 삭제 가능하도록 변경 예정
+//    @GetMapping("/com-delete")
+//    public String comDelete(Integer id) {
+//
+//        commCelebrateOrMournService.postDelete(id);
+//
+//        return "redirect:/church/%EC%86%8C%ED%86%B5/com-list";
+//    }
 
     // 글수정
     @GetMapping("/com-modify/{id}")
@@ -155,14 +155,22 @@ public class CommCelebrateOrMournController {
     public String comUpdate(@PathVariable("id") Integer id, CelebrateOrMourn celebrateOrMourn, Model model){
 
         CelebrateOrMourn celebrateOrMournTemp = commCelebrateOrMournService.postView(id);
-//        celebrateOrMournTemp.setTitle(celebrateOrMourn.getTitle());
-//        celebrateOrMournTemp.setContent(celebrateOrMourn.getContent());
-//        celebrateOrMournTemp.setAuthor(celebrateOrMourn.getAuthor());
+
+        celebrateOrMournTemp.setName(celebrateOrMourn.getName());
+        celebrateOrMournTemp.setChurchOfficerId(celebrateOrMourn.getChurchOfficerId());
+        celebrateOrMournTemp.setOccasionId(celebrateOrMourn.getOccasionId());
+        celebrateOrMournTemp.setCelebrateName(celebrateOrMourn.getCelebrateName());
+        celebrateOrMournTemp.setMournName(celebrateOrMourn.getMournName());
+        celebrateOrMournTemp.setCondolenceId(celebrateOrMourn.getCondolenceId());
+        celebrateOrMournTemp.setCustomInput(celebrateOrMourn.getCustomInput());
+        celebrateOrMournTemp.setOccasionVenue(celebrateOrMourn.getOccasionVenue());
+        celebrateOrMournTemp.setContent(celebrateOrMourn.getContent());
+        celebrateOrMournTemp.setOccasionDate(celebrateOrMourn.getOccasionDate());
 
         commCelebrateOrMournService.write(celebrateOrMournTemp);
 
         model.addAttribute("message", "수정이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/church/소통/com-view?id=" + id);
+        model.addAttribute("searchUrl", "/church/소통/com-list");
 
         return "/pages/communication/message";
     }
